@@ -22,6 +22,30 @@ public class HelloWorld {
             ctx.result(String.format("Hello, %s!", name));
         });
 
+
+        // Обратите внимание, что id — это не обязательно число
+        app.get("/courses/{id}", ctx -> {
+            ctx.result("Course ID: " + ctx.pathParam("id"));
+        });
+        app.get("/users/{id}", ctx -> {
+            ctx.result("User ID: " + ctx.pathParam("id"));
+        });
+
+        // Название параметров мы выбрали произвольно
+        app.get("/courses/{courseId}/lessons/{id}", ctx -> {
+            ctx.result(String.format("Course ID: %s%nLesson ID: %s",
+                ctx.pathParam("courseId"),
+                ctx.pathParam("id"))
+            );
+        });
+
+        app.get("/users/{id}/post/{postId}", ctx -> {
+            ctx.result(String.format("User ID: %s%nPost ID: %s",
+                ctx.pathParam("id"),
+                ctx.pathParam("postId"))
+            );
+        });
+
         app.start(7070); // Стартуем веб-сервер
     }
 }
